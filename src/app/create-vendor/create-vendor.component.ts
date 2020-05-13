@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vendor } from '../model/vendor';
 import { Vendorservice } from '../service/vendorservice';
 import { Router } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-create-vendor',
@@ -12,6 +13,7 @@ export class CreateVendorComponent implements OnInit {
 
   vendor: Vendor = new Vendor();
   submitted = false;
+  
 
   constructor(private vendorService: Vendorservice,
     private router: Router) { }

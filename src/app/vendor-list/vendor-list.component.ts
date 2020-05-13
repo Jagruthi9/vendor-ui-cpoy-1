@@ -38,7 +38,27 @@ export class VendorListComponent implements OnInit {
     this.router.navigate(['details',vendorId ]);
   }
 
+  
   updateVendor(vendorId: number){
     this.router.navigate(['update', vendorId]);
   }
 }
+// public vendors: Vendor[];
+// vendor: Vendor;
+
+//  constructor(private vendorService: Vendorservice,private route: Router) {}
+
+// ngOnInit() {
+//  this.vendorService.getVendorsList().subscribe(data=>this.vendors=data);
+// }
+
+// delete(id: number){
+//   if(confirm(`Are you sure to delete the vendor#${id}`)){
+//     this.vendorService.deleteVendor(id).subscribe(data=>console.log(data));
+//   }
+// }
+
+// public setVendor(vendor: Vendor) {
+//   this.vendor = vendor;    
+// }
+// }

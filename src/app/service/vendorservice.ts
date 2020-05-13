@@ -6,16 +6,22 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
   })
 export class Vendorservice {
-    private baseUrl = "http://localhost:9091/vendor";
+  private baseUrl="http://localhost:5000/vendor-service/vendor";
+  public username: String;
+ public password: String;
+
 
     constructor(private http: HttpClient) { }
   
     getVendor(vendorId: number): Observable<any> {
-      return this.http.get(`${this.baseUrl}/only/${vendorId}`);
+      return this.http.get(`${this.baseUrl}/get/${vendorId}`);
+
     }
-  
+  getProducts(vendorId: number): Observable<any> {
+      return this.http.get(`${this.baseUrl}/${vendorId}`);
+    }
     createVendor(user:Vendor): Observable<any> {
-      return this.http.post(this.baseUrl+"/addvendor",user);
+      return this.http.post(this.baseUrl+"/add",user);
     }
   
     updateVendor(vendorId: number, value: any): Observable<Object> {
@@ -23,10 +29,10 @@ export class Vendorservice {
       }
   
     deleteVendor(vendorId:number): Observable<any> {
-      return this.http.delete(`${this.baseUrl}/${vendorId}`, { responseType: 'text' });
+      return this.http.delete(`${this.baseUrl}/delete/${vendorId}`, { responseType: 'text' });
     }
   
     getVendorsList(): Observable<any> {
-      return this.http.get(this.baseUrl+"/vendors");
+      return this.http.get(this.baseUrl+"/getAll");
     }
 }
