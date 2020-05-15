@@ -11,54 +11,64 @@ import { Vendorservice } from '../service/vendorservice';
   styleUrls: ['./vendor-list.component.css']
 })
 export class VendorListComponent implements OnInit {
-  vendors: Observable<Vendor[]>;
+
+  // vendors: Observable<Vendor[]>;
   
-  constructor(private vendorservice: Vendorservice,
-    private router: Router) {}
+  // constructor(private vendorservice: Vendorservice,
+  //   private router: Router) {}
+
+  // ngOnInit() {
+  //   this.reloadData();
+  // }
+
+  // reloadData() {
+  //   this.vendors = this.vendorservice.getVendorsList();
+  // }
+
+  // deleteVendor(VendorId: number) {
+  //   this.vendorservice.deleteVendor(VendorId)
+  //     .subscribe(
+  //       data => {
+  //         console.log(data);
+  //         this.reloadData();
+  //       },
+  //       error => console.log(error));
+  // }
+
+  // vendorDetails(vendorId: number){
+  //   this.router.navigate(['details',vendorId ]);
+  // }
+
+  // updateVendor(vendorId: number){
+  //   this.router.navigate(['update', vendorId]);
+  // }
+//   public setVendor(vendor: Vendor) {
+//     this.vendor = vendor;   
+// }
+public vendors: Vendor[];
+  vendor: Vendor;
+  
+
+   constructor(private vendorService: Vendorservice,private route: Router) {}
 
   ngOnInit() {
-    this.reloadData();
+   this.vendorService.getAll().subscribe(data=>this.vendors=data);
   }
 
-  reloadData() {
-    this.vendors = this.vendorservice.getVendorsList();
+  delete(id: number){
+    if(confirm(`Are you sure to delete the vendor#${id}`)){
+      this.vendorService.deleteVendor(id).subscribe(data=>console.log(data));
+    }
   }
 
-  deleteVendor(VendorId: number) {
-    this.vendorservice.deleteVendor(VendorId)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-  }
-
-  vendorDetails(vendorId: number){
-    this.router.navigate(['details',vendorId ]);
-  }
-
-  
-  updateVendor(vendorId: number){
-    this.router.navigate(['update', vendorId]);
+  // delete(){
+  //   this.vendorService.deleteVendor(this.vendor.vendorId).subscribe(
+  //     ()=]console.log(`Vendor with VendorId=${this.vendor.vendorId}Deleted`),(error)=]console.log(error)
+  //   );
+  //   this.notifyDelete.emit(this.vendor.vendorId);
+  // }
+  public setVendor(vendor: Vendor) {
+    this.vendor = vendor;    
   }
 }
-// public vendors: Vendor[];
-// vendor: Vendor;
 
-//  constructor(private vendorService: Vendorservice,private route: Router) {}
-
-// ngOnInit() {
-//  this.vendorService.getVendorsList().subscribe(data=>this.vendors=data);
-// }
-
-// delete(id: number){
-//   if(confirm(`Are you sure to delete the vendor#${id}`)){
-//     this.vendorService.deleteVendor(id).subscribe(data=>console.log(data));
-//   }
-// }
-
-// public setVendor(vendor: Vendor) {
-//   this.vendor = vendor;    
-// }
-// }
